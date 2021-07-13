@@ -1,6 +1,8 @@
 import React, {FunctionComponent} from "react";
 import styled from "@emotion/styled";
 import PostItem from "./PostItem";
+import { FluidObject } from "gatsby-image";
+import { useMemo } from "react";
 
 export type PostType = {
     node: {
@@ -11,13 +13,16 @@ export type PostType = {
         date: string;
         categories: string[];
         thumbnail: {
-          publicURL: string;
+          childImageSharp: {
+              fluid: FluidObject;
+          }
         };
       };
     };
   };
 
 interface PostListProps {
+    selectedCategory: string
     posts: PostType[]
 }
 
@@ -36,22 +41,21 @@ const PostListWrapper = styled.div`
     }
 `
 
-const PostList: FunctionComponent<PostListProps> = ({posts}) => {
-    return (
+const PostList: FunctionComponent<PostListProps> = ({selectedCategory,posts}) => {
+    const postListData = useMemo(
+        () =>
+            posts.filter(({ node: { frontmatter: { categories } } }: PostType) =>
+                selectedCategory !== 'All'
+                    ? categories.includes(selectedCategory)
+                    : true
+            ),[selectedCategory]
+    )
+    return ( 
         <PostListWrapper>
-            {posts.map(
-                ({
-                    node: {
-                        id,
-                        frontmatter: {
-                            thumbnail: { publicURL },
-                            ...rest
-                        }
-                    }
-                }: PostType) => (
+            {postListData.map(
+                ({ node: { id,frontmatter }}: PostType) => (
                     <PostItem
-                        {...rest}
-                        thumbnail={publicURL}
+                        {...frontmatter}
                         link="https://github.com/kwb020312/React-GatsBy_Blog"
                         key={id}
                     />

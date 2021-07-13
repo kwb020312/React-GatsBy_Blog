@@ -1,9 +1,12 @@
 import React, { FunctionComponent } from "react";
 import styled from "@emotion/styled";
+import Img,{ FluidObject } from "gatsby-image";
 
-const PROFILE_IMAGE_LINK = 'https://avatars.githubusercontent.com/u/46777310?v=4'
+export interface ProfileImageProps {
+    profileImage: FluidObject;
+}
 
-const ProfileImageWrapper = styled.img`
+const ProfileImageWrapper = styled(Img)`
     width: 120px;
     height: 120px;
     margin-bottom: 30px;
@@ -15,6 +18,6 @@ const ProfileImageWrapper = styled.img`
     }
 `
 
-const ProfileImage: FunctionComponent = () => <ProfileImageWrapper src={PROFILE_IMAGE_LINK} alt="Profile Image" />
+const ProfileImage: FunctionComponent<ProfileImageProps> = ({profileImage}) => <ProfileImageWrapper fluid={profileImage} alt="Profile Image" />
 
 export default ProfileImage
