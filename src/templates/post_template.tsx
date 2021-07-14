@@ -1,11 +1,39 @@
-import { FunctionComponent } from "react";
+import React, { FunctionComponent } from 'react';
+import { graphql } from 'gatsby';
+import Template from 'components/Common/Template';
 
 interface PostTemplateProps {}
 
-const PostTemplate: FunctionComponent<PostTemplateProps> = (props) => {
-    console.log(props)
+const PostTemplate: FunctionComponent<PostTemplateProps> = function (props) {
+  console.log(props);
 
-    return <div>Post Template</div>
-}
+  return <Template>Post Template</Template>
+};
 
-export default PostTemplate
+export default PostTemplate;
+
+
+export const queryMarkdownDataBySlug = graphql`
+  query queryMarkdownDataBySlug($slug: String) {
+    allMarkdownRemark(filter: { fields: { slug: { eq: $slug } } }) {
+      edges {
+        node {
+          html
+          frontmatter {
+            title
+            summary
+            date(formatString: "YYYY.MM.DD.")
+            categories
+            thumbnail {
+              childImageSharp {
+                fluid(fit: INSIDE, quality: 100) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;

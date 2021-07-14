@@ -9,6 +9,7 @@ import { graphql } from "gatsby"
 import { ProfileImageProps } from "components/Main/ProfileImage"
 import queryString,{ ParsedQuery } from "query-string"
 import { useMemo } from "react"
+import Template from "components/Common/Template"
 
 interface IndexPageProps {
     location: {
@@ -25,12 +26,6 @@ interface IndexPageProps {
         }
     }
 }
-
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-`
 
 const IndexPage:FunctionComponent<IndexPageProps> = ({
     location:{search},
@@ -64,13 +59,11 @@ const IndexPage:FunctionComponent<IndexPageProps> = ({
           {All:0}
       ),[])
     return (
-        <Container>
-            <GlobalStyle />
+        <Template>
             <Introduction profileImage={fluid} />
             <CategoryList selectedCategory={selectedCategory} categoryList={categoryList} />
             <PostList selectedCategory={selectedCategory} posts={edges} />
-            <Footer />
-        </Container>
+        </Template>
     )
 }
 
