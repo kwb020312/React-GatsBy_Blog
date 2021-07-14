@@ -2,12 +2,14 @@ import React, {FunctionComponent} from "react";
 import styled from "@emotion/styled";
 import PostItem from "./PostItem";
 import { FluidObject } from "gatsby-image";
-import { useMemo } from "react";
 import useInfiniteScroll, { useInfiniteScrollType } from "hooks/useInfiniteScroll";
 
 export type PostType = {
     node: {
       id: string;
+      fields: {
+        slug: string;
+      };
       frontmatter: {
         title: string;
         summary: string;
@@ -15,8 +17,8 @@ export type PostType = {
         categories: string[];
         thumbnail: {
           childImageSharp: {
-              fluid: FluidObject;
-          }
+            fluid: FluidObject;
+          };
         };
       };
     };
@@ -42,21 +44,30 @@ const PostListWrapper = styled.div`
     }
 `
 
-const PostList: FunctionComponent<PostListProps> = ({selectedCategory,posts}) => {
-    const { containerRef, postList }: useInfiniteScrollType = useInfiniteScroll(selectedCategory, posts)
-    return ( 
-        <PostListWrapper ref={containerRef}>
-            {posts.map(
-                ({ node: { id,frontmatter }}: PostType) => (
-                    <PostItem
-                        {...frontmatter}
-                        link="https://github.com/kwb020312/React-GatsBy_Blog"
-                        key={id}
-                    />
-                )
-            )}
-        </PostListWrapper>
-    )
-}
+const PostList: FunctionComponent<PostListProps> = function ({
+    selectedCategory,
+    posts,
+  }) {
+    const { containerRef, postList }: useInfiniteScrollType = useInfiniteScroll(
+      selectedCategory,
+      posts,
+    );
+  
+    return (
+      <PostListWrapper ref={containerRef}>
+        {postList.map(
+          ({
+            node: {
+              id,
+              fields: { slug },
+              frontmatter,
+            },
+          }: PostType) => (
+            <PostItem {...frontmatter} link={slug} key={id} />
+          ),
+        )}
+      </PostListWrapper>
+    );
+  };
 
 export default PostList
