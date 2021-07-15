@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "lib": ["es2017.object","ES2016","DOM"],
     "target": "es5",
     "module": "commonjs",
     "allowJs": true,
@@ -21,5 +22,5 @@
     "types": ["@emotion/core"]
   },
   "include": ["src/**/*.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }

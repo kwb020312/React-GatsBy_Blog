@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 import Template from 'components/Common/Template';
 import PostHead, { PostHeadProps } from 'components/Post/PostHead';
 import PostContent from 'components/Post/PostContent';
+import CommentWidget from 'components/Post/CommentWidget';
 
 interface PostTemplateProps {
   data: {
@@ -21,17 +22,20 @@ interface PostTemplateProps {
 
 const PostTemplate: FunctionComponent<PostTemplateProps> = function ({
   data: {
-    allMarkdownRemark: { edges }
-  }
+    allMarkdownRemark: { edges },
+  },
 }) {
-  const { node: { html, frontmatter } } = edges[0]
+  const {
+    node: { html, frontmatter },
+  } = edges[0];
 
   return (
     <Template>
       <PostHead {...frontmatter} />
       <PostContent html={html} />
+      <CommentWidget />
     </Template>
-  )
+  );
 };
 
 export default PostTemplate;
