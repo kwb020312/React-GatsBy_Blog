@@ -3,7 +3,7 @@ module.exports = {
     title: `KimChobby @kwb020312 's Blog`,
     description: `처음 다뤄보는 라이브러리들을 활용해 제작해본 개인 블로그입니다.`,
     author: `@Chobby`,
-    siteUrl: 'https://github.com/kwb020312',
+    siteUrl: 'https://kwb020312.github.io/',
   },
   plugins: [
     {
