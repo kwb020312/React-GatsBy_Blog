@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://kwb020312.github.io/sitemap/sitemap-index.xml
+Host: https://kwb020312.github.io
