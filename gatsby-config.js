@@ -1,8 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `KimChobby @kwb020312 's Blog`,
+    description: `처음 다뤄보는 라이브러리들을 활용해 제작해본 개인 블로그입니다.`,
+    author: `@Chobby`,
+    siteUrl: 'https://github.com/kwb020312',
   },
   plugins: [
     {
@@ -10,6 +11,13 @@ module.exports = {
       options: {
         isTSX: true,
         allExtensions: true,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-canonical-urls',
+      options: {
+        siteUrl: 'https://kwb020312.github.io/',
+        stripQueryString: true,
       },
     },
     `gatsby-plugin-emotion`,
