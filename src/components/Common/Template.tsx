@@ -47,10 +47,7 @@ const Template: FunctionComponent<TemplateProps> = ({
             <meta name="twitter:site" content="@Chobby" />
             <meta name="twitter:creator" content="@Chobby" />
 
-            <meta
-                name="google-site-verification"
-                content="웹 마스터 도구가 제공하는 Meta 태그"
-            />
+            <meta name="google-site-verification" content="HiS5KlbzJTMfgD_vA4bDkR5v8Q6kmbSNfCFf73AEcw4" />
 
             <html lang="ko" />
         </Helmet>
